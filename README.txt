@@ -29,6 +29,31 @@ To implement these TCs, the selected tool was Selenium Webdriver, because the bo
 
 Initially, I intended to use JUnit engine for test execution and Pass/Fail logs with the Webdriver. Hovewer, I lost a couple of hours trying to make the Junit work with the Webdriver 3.x, without success. This progress can be seen at the project CaseStudy, in the repository. As I didn't have much time left, I started a second project, CaseStudy_part2, where I used only the Webdriver to implement the steps of the test case. As I wasn't using the JUnit engine, I only printed message logs for the passed or fail steps, not generating any Pass/Fail logs.
 
-To execute the project, it should be imported into eclipse and run. Since Webdriver uses the Geckodriver for navigating the browser, it miht be necessary to update the Geckodriver location for successful execution.
+Since I ended up with little time to continue, I have implemented only the first steps of the Wikipedia exercise. To execute the project, it should be imported into eclipse and run. Since Webdriver uses the Geckodriver for navigating the browser, it miht be necessary to update the Geckodriver location for successful execution.
 
+API EXERCISE
 
+For testing the API exercise, I used SoapUi, since it's a very simple tool for sending/receiving REST requests and responses that allows the creation of test suites with Assertion points, that allow us to verify the response and it's content.
+I started by defining some test cases for the JSONPlaceHolder API and implementing them on the SoapUi project:
+
+TC1 - GET
+Request - All the posts from userID = 5
+E.R.: Response has HTTP code = 200 OK and contains 10 posts.
+TC2 - GET
+Request - All the posts from userID = 1 with title = "eveniet quod temporibus"
+E.R.: Response has HTTP code = 200 OK and returns zero posts.
+TC3 - PATCH
+Request - Change userId=1 email from "Sincere@april.biz" to "NewMail@april.biz"
+E.R.: Response has HTTP code = 200 OK, email was updated on database
+TC4 - GET
+Request - User with email="Sincere@april.biz"
+E.R.: Response has HTTP code = 404 Not Found, user should no longer be locatable since the email was changed.
+TC4 - DELETE
+Request - Delete all posts from userId=4
+E.R.: Response should have HTTP code = 405 Not Allowed, unless specified in the requirements that it should be possible to delete the whole collection in a single request. (In this API case, it returns 404 Not Found, which is also an acceptable behavior, since it implies a post should be specified in order to be deleted).
+
+There are much more test cases that should be defined for this API, consisting of all the CRUD cycle and positive/negative scenarios. Additionally, more Assertions have to be added to each request of the test suite in order to verify the contents of the response. That can be done using the Jpath content of the responses, which I am not implementing by lack of time.
+
+Summary:
+Unfortunately, I have already surpassed the suggested time for implementation of this case study, so I have only started the resolution of this exercise, and it will be left incomplete. The remaining tasks would be to define a satisfying set of test cases (i.e. that cover the most used and most safety-critical scenarios of the API) and implement requests with related TCs in the project for testing the behavior of the API in each TC.
+For executing the TCs, the .xml project file should be open in SoapUi.
